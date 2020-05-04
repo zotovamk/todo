@@ -1,0 +1,3 @@
+<header class="toolbar">
+  <a *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">{{ link.title }}</a>
+</header>

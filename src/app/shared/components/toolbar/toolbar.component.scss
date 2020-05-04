@@ -1,0 +1,23 @@
+@import '../../../../theme/theme-variables.scss';
+
+:host {
+  display: flex;
+  justify-content: flex-end;
+  height: 60px;
+
+  a {
+    text-decoration: none;
+
+    &:visited {
+      color: $color-default;
+    }
+
+    &.active {
+      color: $color-accent;
+    }
+    
+    &:not(.active):hover {
+      color: $color-hovered-default;
+    }
+  } 
+}
