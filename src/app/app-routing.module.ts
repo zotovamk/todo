@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TodoComponent } from './views';
+import { TodoComponent } from './views/todo/todo.component';
 import { PATHS } from './models/constants';
 
 const routes: Routes = [
   { path: PATHS.TODO, component: TodoComponent },
   { path: '', redirectTo: PATHS.TODO, pathMatch: 'full' },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

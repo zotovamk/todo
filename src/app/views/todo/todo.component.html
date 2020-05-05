@@ -1,1 +1,32 @@
-<p>todo works!</p>
+<app-tasks-list [tasks]="tasks" (deleteTaskByInd)="deleteTask($event)" (checkTaskByInd)="toggleTaskStatus($event)">
+</app-tasks-list>
+
+<section class="task new-task" *ngIf="newTask.isShown; else showNewTask">
+  <div
+    class="task__star-icon icon-button"
+    [class.selected]="newTask.isImportant"
+    (click)="newTask.isImportant = !newTask.isImportant"
+  ></div>
+
+  <input class="new-task__input" type="text" #newTaskInput (keyup.enter)="addTask(newTaskInput.value)" />
+
+  <div class="new-task__cancel icon-button" (click)="cancelAdding()"></div>
+  <div class="new-task__save icon-button" (click)="addTask(newTaskInput.value)"></div>
+</section>
+
+<ng-template #showNewTask>
+  <section class="show-new-task task" (click)="newTask.isShown = true">
+    <div class="show-new-task__add-icon icon"></div>
+    Add new task
+  </section>
+</ng-template>
+
+<h2>Completed tasks</h2>
+<app-tasks-list
+  *ngIf="completedTasks.length"
+  [tasks]="completedTasks"
+  isChecked="true"
+  (deleteTaskByInd)="deleteCompleted($event)"
+  (checkTaskByInd)="toggleTaskStatus($event)"
+>
+</app-tasks-list>

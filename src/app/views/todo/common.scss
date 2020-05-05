@@ -1,0 +1,57 @@
+@import '../../../theme/theme-variables.scss';
+
+.task {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  padding: 0 8px;
+  border-bottom: 1px solid #c0c0c44a;
+
+  &:first-of-type {
+    border-top: 1px solid #c0c0c44a;
+  }
+}
+
+.task__star-icon {
+  mask-image: url('src/assets/icons/star-white-18dp.svg');
+
+  &.selected {
+    background-color: $color-accent;
+  }
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+.icon,
+.icon-button {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: $color-hovered-default;
+  mask-repeat: no-repeat;
+  mask-position: center;
+}
+
+.icon-button {
+  cursor: pointer;
+  transition: background-color 0.3s;
+  will-change: background-color;
+
+  &:hover {
+    background-color: $color-accent;
+  }
+
+  &.task__remove {
+    mask-image: url('src/assets/icons/clear-white-18dp.svg');
+  }
+
+  &.new-task__cancel {
+    mask-image: url('src/assets/icons/cancel-white-18dp.svg');
+  }
+
+  &.new-task__save {
+    mask-image: url('src/assets/icons/check-white-18dp.svg');
+  }
+}

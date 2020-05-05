@@ -1,0 +1,35 @@
+@import '../../../theme/theme-variables.scss';
+@import './common.scss';
+
+.new-task {
+  .new-task__input {
+    flex: 1;
+    height: 36px;
+    border: none;
+    border-bottom: 1px solid #c2beb7;
+    background-color: transparent;
+    color: $color-default;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+    will-change: border-color;
+
+    &:focus {
+      border-color: $color-accent;
+    }
+  }
+}
+
+.show-new-task {
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-hovered-default;
+  }
+
+  &__add-icon {
+    mask-image: url('src/assets/icons/add-white-18dp.svg');
+    background-color: $color-accent;
+  }
+}
