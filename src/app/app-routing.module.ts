@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TodoComponent } from './views/todo/todo.component';
-import { PATHS } from './models/constants';
+import { PATHS } from '@models/constants';
+import { TodoRootComponent } from '@views/todo/todo-root.component';
 
 const routes: Routes = [
-  { path: PATHS.TODO, component: TodoComponent },
+  { path: PATHS.TODO, component: TodoRootComponent },
   { path: '', redirectTo: PATHS.TODO, pathMatch: 'full' },
   { path: '**', redirectTo: '' },
 ];

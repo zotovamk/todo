@@ -1,9 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ITask } from 'src/app/models';
-import { TasksService } from './services';
+import { ITask } from '@models/interfaces';
+import { TasksService } from '../../services';
 
 @Component({
   selector: 'app-todo',
@@ -11,6 +11,8 @@ import { TasksService } from './services';
   styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit, OnDestroy {
+  @Input() withCompletedArr = true;
+
   tasks: ITask[] = [];
   newTask: { isImportant: boolean; isShown: boolean } = { isImportant: false, isShown: false };
   completedTasks: ITask[] = [];
@@ -20,7 +22,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   constructor(private readonly tasksService: TasksService) {}
 
   ngOnInit(): void {
-    this.tasksService.setTasks();
+    this.tasksService.setTasksFromApi();
     this.subscribeToTasks();
   }
 
@@ -34,16 +36,12 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.clearNewTask();
   }
 
-  deleteTask(ind: number) {
-    this.tasksService.deleteCurrent(ind);
+  deleteTask(id: number, isCompleted: boolean) {
+    this.tasksService.deleteTask(id, isCompleted);
   }
 
-  deleteCompleted(ind: number) {
-    this.tasksService.deleteCompleted(ind);
-  }
-
-  toggleTaskStatus(data: { ind: number; isChecked: boolean }) {
-    data.isChecked ? this.tasksService.uncompleteTask(data.ind) : this.tasksService.completeTask(data.ind);
+  toggleTaskStatus(data: { id: number; isChecked: boolean }) {
+    data.isChecked ? this.tasksService.uncompleteTask(data.id) : this.tasksService.completeTask(data.id);
   }
 
   cancelAdding() {

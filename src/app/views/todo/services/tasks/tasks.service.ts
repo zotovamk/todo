@@ -1,39 +1,29 @@
 import { Injectable } from '@angular/core';
-import { ITask } from 'src/app/models';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-export interface ITasks {
-  current: ITask[];
-  completed: ITask[];
-}
-
-const MOCK_TASKS: ITask[] = [
-  { id: 0, title: 'test', isImportant: true },
-  { id: 1, title: 'another one', isImportant: false },
-  { id: 2, title: 'aaand another one', isImportant: false },
-];
+import { ITask, ITasks, ParamOfITasks } from '@models/interfaces';
+import { TasksApiService } from '../tasks-api';
 
 @Injectable()
 export class TasksService {
   private tasksObj$: BehaviorSubject<ITasks> = new BehaviorSubject({ current: [], completed: [] });
 
-  constructor() {}
-
   get tasks$(): Observable<ITasks> {
     return this.tasksObj$.asObservable();
   }
 
+  get tasks(): ITasks {
+    return this.tasksObj$.getValue();
+  }
+
   private get current(): ITask[] {
-    return this.tasksObj$.getValue().current;
+    return this.tasks.current;
   }
 
   private get completed(): ITask[] {
-    return this.tasksObj$.getValue().completed;
+    return this.tasks.completed;
   }
 
-  setTasks() {
-    this.updateTasks({ current: MOCK_TASKS, completed: [] });
-  }
+  constructor(protected tasksApiService: TasksApiService) {}
 
   addTask(title: string, isImportant: boolean = false) {
     const current = this.current;
@@ -47,22 +37,18 @@ export class TasksService {
     this.updateTasks({ current });
   }
 
-  deleteCurrent(ind: number) {
-    const current = this.current;
-    current.splice(ind, 1);
+  deleteTask(id: number, isCompleted: boolean) {
+    const param = isCompleted ? ParamOfITasks.Completed : ParamOfITasks.Current;
+    const tasksList = this[param];
+    const ind = this.getIndById(id, param);
 
-    this.updateTasks({ current });
+    tasksList.splice(ind, 1);
+    this.updateTasks({ [param]: tasksList });
   }
 
-  deleteCompleted(ind: number) {
-    const completed = this.completed;
-    completed.splice(ind, 1);
-
-    this.updateTasks({ completed });
-  }
-
-  completeTask(ind: number) {
-    const tasksObj = this.tasksObj$.getValue();
+  completeTask(id: number) {
+    const tasksObj = this.tasks;
+    const ind = this.getIndById(id, ParamOfITasks.Current);
     const task = this.current[ind];
 
     tasksObj.completed.unshift(task);
@@ -70,8 +56,9 @@ export class TasksService {
     this.updateTasks(tasksObj);
   }
 
-  uncompleteTask(ind: number) {
-    const tasksObj = this.tasksObj$.getValue();
+  uncompleteTask(id: number) {
+    const tasksObj = this.tasks;
+    const ind = this.getIndById(id, ParamOfITasks.Completed);
     const task = this.completed[ind];
 
     tasksObj.current.push(task);
@@ -79,7 +66,22 @@ export class TasksService {
     this.updateTasks(tasksObj);
   }
 
-  private updateTasks(updated: { current?: ITask[]; completed?: ITask[] }) {
-    this.tasksObj$.next({ ...this.tasksObj$.getValue(), ...updated });
+  updateTasks(updated: { current?: ITask[]; completed?: ITask[] }) {
+    const updatedTasks = { ...this.tasks, ...updated };
+    this.tasksApiService.updateTasks(updatedTasks);
+  }
+
+  setTasksFromApi() {
+    this.tasksApiService.getTasks().subscribe(tasks => {
+      this.setTasks(tasks);
+    });
+  }
+
+  setTasks(tasks: ITasks) {
+    this.tasksObj$.next(tasks);
+  }
+
+  private getIndById(id: number, param: ParamOfITasks) {
+    return this.tasks[param].findIndex(t => t.id === id);
   }
 }

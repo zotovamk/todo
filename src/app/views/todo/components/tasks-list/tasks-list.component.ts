@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { ITask } from 'src/app/models';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ITask } from '@models/interfaces';
 
 @Component({
   selector: 'app-tasks-list',
@@ -10,18 +10,19 @@ export class TasksListComponent {
   @Input() tasks: ITask[] = [];
   @Input() isChecked = false;
 
-  @Output() private deleteTaskByInd = new EventEmitter<number>();
-  @Output() private checkTaskByInd = new EventEmitter<{ ind: number; isChecked: boolean }>();
+  @Output() private deleteTaskById = new EventEmitter<number>();
+  @Output() private checkTaskById = new EventEmitter<{ id: number; isChecked: boolean }>();
 
   constructor() {}
 
-  deleteTask(ind: number) {
-    this.deleteTaskByInd.emit(ind);
+  deleteTask(id: number) {
+    this.deleteTaskById.emit(id);
   }
 
-  checkTask(ind: number) {
-    this.checkTaskByInd.emit({ ind, isChecked: this.isChecked });
+  checkTask(id: number) {
+    this.checkTaskById.emit({ id, isChecked: this.isChecked });
   }
 
+  isCheckedT = (task: ITask) => (task.hasOwnProperty('isCompleted') ? task.isCompleted : this.isChecked);
   trackById = (_, task: ITask) => task.id;
 }

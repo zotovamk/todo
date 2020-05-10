@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TodoComponent } from './todo.component';
 import { TasksService } from './services';
-import { TasksListComponent } from './components/tasks-list/tasks-list.component';
+import { WithoutComplitedArrDirective } from './directives';
+import { TodoComponent, TasksListComponent } from './components';
+import { TodoRootComponent } from './todo-root.component';
 
 @NgModule({
-  declarations: [TodoComponent, TasksListComponent],
+  declarations: [TodoRootComponent, TodoComponent, TasksListComponent, WithoutComplitedArrDirective],
   imports: [CommonModule],
   providers: [TasksService],
 })

@@ -1,12 +1,9 @@
-<app-tasks-list [tasks]="tasks" (deleteTaskByInd)="deleteTask($event)" (checkTaskByInd)="toggleTaskStatus($event)">
+<app-tasks-list [tasks]="tasks" (deleteTaskById)="deleteTask($event, false)" (checkTaskById)="toggleTaskStatus($event)">
 </app-tasks-list>
 
 <section class="task new-task" *ngIf="newTask.isShown; else showNewTask">
-  <div
-    class="task__star-icon icon-button"
-    [class.selected]="newTask.isImportant"
-    (click)="newTask.isImportant = !newTask.isImportant"
-  ></div>
+  <div class="task__star-icon icon-button" [class.selected]="newTask.isImportant"
+    (click)="newTask.isImportant = !newTask.isImportant"></div>
 
   <input class="new-task__input" type="text" #newTaskInput (keyup.enter)="addTask(newTaskInput.value)" />
 
@@ -21,12 +18,9 @@
   </section>
 </ng-template>
 
-<h2>Completed tasks</h2>
-<app-tasks-list
-  *ngIf="completedTasks.length"
-  [tasks]="completedTasks"
-  isChecked="true"
-  (deleteTaskByInd)="deleteCompleted($event)"
-  (checkTaskByInd)="toggleTaskStatus($event)"
->
-</app-tasks-list>
+<ng-container *ngIf="completedTasks.length && withCompletedArr">
+  <h2>Completed tasks</h2>
+  <app-tasks-list [tasks]="completedTasks" isChecked="true" (deleteTaskById)="deleteTask($event, true)"
+    (checkTaskById)="toggleTaskStatus($event)">
+  </app-tasks-list>
+</ng-container>

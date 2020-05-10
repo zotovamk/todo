@@ -22,19 +22,19 @@ describe('TasksListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('[deleteTask] should emit deleteTaskByInd with 0 as ind', () => {
-    (component as any).deleteTaskByInd.emit = jasmine.createSpy();
+  it('[deleteTask] should emit deleteTaskById with 0 as id', () => {
+    (component as any).deleteTaskById.emit = jasmine.createSpy();
     component.deleteTask(0);
 
-    expect((component as any).deleteTaskByInd.emit).toHaveBeenCalledWith(0);
+    expect((component as any).deleteTaskById.emit).toHaveBeenCalledWith(0);
   });
 
-  it('[checkTask] should emit deleteTaskByInd with 1 as ind and isChecked as false', () => {
+  it('[checkTask] should emit deleteTaskById with 1 as id and isChecked as false', () => {
     component.isChecked = true;
-    (component as any).checkTaskByInd.emit = jasmine.createSpy();
+    (component as any).checkTaskById.emit = jasmine.createSpy();
 
     component.checkTask(1);
 
-    expect((component as any).checkTaskByInd.emit).toHaveBeenCalledWith({ ind: 1, isChecked: true });
+    expect((component as any).checkTaskById.emit).toHaveBeenCalledWith({ id: 1, isChecked: true });
   });
 });

@@ -1,22 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { ToolbarComponent } from '@shared/components';
+import { TodoModule } from '@views/todo';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ToolbarComponent } from './shared/components';
-import { TodoModule } from './views/todo';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ToolbarComponent
-  ],
-  imports: [
-    BrowserModule,
-    TodoModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent, ToolbarComponent],
+  imports: [BrowserModule, TodoModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

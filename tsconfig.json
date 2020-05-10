@@ -20,19 +20,22 @@
     ],
     "paths": {
       "@app/*": [
-        "app/*"
+        "src/app/*"
       ],
       "@env/*": [
-        "environments/*"
+        "src/environments/*"
       ],
       "@theme/*": [
-        "theme/*"
+        "src/theme/*"
+      ],
+      "@models/*": [
+        "src/app/models/*"
       ],
       "@shared/*": [
-        "app/shared/*"
+        "src/app/shared/*"
       ],
       "@views/*": [
-        "app/views/*"
+        "src/app/views/*"
       ],
     },
   },

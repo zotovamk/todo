@@ -1,11 +1,11 @@
 <section class="task" *ngFor="let task of tasks; index as i; trackBy: trackById">
-  <input class="task__checkbox" type="checkbox" name="done" [id]="'done' + i + isChecked" [checked]="isChecked"
-    (change)="checkTask(i)" />
+  <input class="task__checkbox" type="checkbox" name="done" [id]="'done' + i + isChecked" [checked]="isCheckedT(task)"
+    (change)="checkTask(task.id)" />
 
   <label class="task__label" [for]="'done' + i + isChecked">
     <div class="task__star-icon icon selected" [hidden]="!task.isImportant"></div>
     <span class="task__text">{{ task.title }}</span>
   </label>
 
-  <button class="task__remove icon-button" (click)="deleteTask(i)"></button>
+  <button class="task__remove icon-button" (click)="deleteTask(task.id)"></button>
 </section>
