@@ -1,3 +1,4 @@
 export enum PATHS {
-  TODO = 'todo'
+  TODO = 'todo',
+  RPC = 'rock-paper-scissors'
 }

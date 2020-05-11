@@ -13,7 +13,10 @@ interface ILink {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToolbarComponent {
-  links: ILink[] = [{ path: PATHS.TODO, title: 'TODO' }];
+  links: ILink[] = [
+    { path: PATHS.RPC, title: 'Rock paper scissors' },
+    { path: PATHS.TODO, title: 'TODO' },
+  ];
 
   constructor() {}
 }

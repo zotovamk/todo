@@ -6,7 +6,10 @@
   height: 60px;
 
   a {
+    margin-left: 36px;
+    color: $color-default;
     text-decoration: none;
+    text-transform: uppercase;
 
     &:visited {
       color: $color-default;
@@ -15,9 +18,9 @@
     &.active {
       color: $color-accent;
     }
-    
+
     &:not(.active):hover {
       color: $color-hovered-default;
     }
-  } 
+  }
 }
