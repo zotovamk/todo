@@ -1,0 +1,34 @@
+proseWrap: always
+printWidth: 120
+tabWidth: 2
+singleQuote: true
+trailingComma: all
+bracketSpacing: true
+semi: true
+useTabs: false
+arrowParens: avoid
+# parser: babylon
+overrides:
+  - files:
+      - '*.js'
+      - '*.jsx'
+    options:
+      parser: babylon
+  - files:
+      - '*.ts'
+      - '*.tsx'
+    options:
+      parser: typescript
+  - files:
+      - '*.css'
+      - '*.scss'
+      - '*.pcss'
+    options:
+      parser: css
+  - files: '*.md'
+    options:
+      parser: markdown
+  - files: '*.json'
+    options:
+      parser: json
+      printWidth: 120

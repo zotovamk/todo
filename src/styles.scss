@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+// variables
+@import 'theme/theme-variables.scss';
+
+// Custom fonts
+@import 'theme/fonts.scss';
+
+body {
+  background-color: $background-color-default;
+  color: $color-default;
+  font-family: 'Montserrat', sans-serif;
+}
