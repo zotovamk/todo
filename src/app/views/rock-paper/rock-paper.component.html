@@ -1,1 +1,17 @@
-<p>rock-paper works!</p>
+<div class="score">Score: {{ score }}</div>
+
+<section class="playground">
+  <div *ngFor="let action of ACTIONS" [appRpcAction]="action" [class.disabled]="!isGameOn"
+    [@chosenTrigger]="getActionState(action)" (click)="onActionClick(action)">
+  </div>
+</section>
+
+<section class="playground enemy">
+  <div *ngIf="!isGameOn && chosen.enemy" [appRpcAction]="chosen.enemy" [@enemyTrigger]></div>
+  <!-- (@enemyTrigger.done)="onAnimationDone($event)" -->
+</section>
+
+<ng-container *ngIf="!isGameOn">
+  <span>{{ resultMsg }}</span>
+  <button (click)="onTryAgainClick()">Try again</button>
+</ng-container>

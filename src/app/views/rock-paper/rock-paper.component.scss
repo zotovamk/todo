@@ -1,0 +1,47 @@
+@mixin disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.playground {
+  display: flex;
+  justify-content: space-around;
+
+  .playground__act {
+    align-self: flex-start;
+    width: 250px;
+    height: 250px;
+    background: center/contain no-repeat;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.8;
+
+    &.rock {
+      background-image: url('src/assets/rpc/rock.png');
+    }
+
+    &.paper {
+      background-image: url('src/assets/rpc/paper.png');
+    }
+
+    &.scissors {
+      background-image: url('src/assets/rpc/scissors.png');
+    }
+
+    &:hover {
+      box-shadow: 2px 2px 4px 2px #20201ec9;
+      opacity: 1;
+    }
+
+    &.disabled {
+      @include disabled();
+    }
+  }
+
+  &.enemy .playground__act {
+    @include disabled();
+    filter: hue-rotate(80deg);
+    transform: translateX(180px);
+    opacity: 1;
+  }
+}

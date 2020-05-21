@@ -46,7 +46,6 @@
     "typescript": "~3.8.3"
   },
   "pre-commit": [
-    "lint",
-    "test"
+    "lint"
   ]
 }
