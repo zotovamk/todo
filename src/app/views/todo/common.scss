@@ -13,7 +13,7 @@
 }
 
 .task__star-icon {
-  mask-image: url('src/assets/icons/star-white-18dp.svg');
+  mask-image: url('/src/assets/icons/star-white-18dp.svg');
 
   &.selected {
     background-color: $color-accent;
@@ -44,14 +44,14 @@
   }
 
   &.task__remove {
-    mask-image: url('src/assets/icons/clear-white-18dp.svg');
+    mask-image: url('/src/assets/icons/clear-white-18dp.svg');
   }
 
   &.new-task__cancel {
-    mask-image: url('src/assets/icons/cancel-white-18dp.svg');
+    mask-image: url('/src/assets/icons/cancel-white-18dp.svg');
   }
 
   &.new-task__save {
-    mask-image: url('src/assets/icons/check-white-18dp.svg');
+    mask-image: url('/src/assets/icons/check-white-18dp.svg');
   }
 }
