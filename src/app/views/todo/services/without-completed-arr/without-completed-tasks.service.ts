@@ -7,7 +7,7 @@ import { TasksApiService } from '../tasks-api';
 
 @Injectable()
 export class WithoutCompletedTasksService extends TasksService {
-  // tslint:disable:variable-name
+  /* eslint-disable @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match */
   private _tasks$: BehaviorSubject<ITasks> = new BehaviorSubject({ current: [], completed: [] });
   private _completedIdsSet: Set<number> = new Set();
 
