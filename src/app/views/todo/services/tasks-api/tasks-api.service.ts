@@ -15,7 +15,7 @@ const MOCK_TASKS: ITasks = {
   providedIn: 'root'
 })
 export class TasksApiService {
-  // tslint:disable-next-line:variable-name
+  // eslint-disable-next-line @typescript-eslint/naming-convention, no-underscore-dangle, id-blacklist, id-match
   private _tasks$: BehaviorSubject<ITasks> = new BehaviorSubject(MOCK_TASKS);
 
   constructor() { }
